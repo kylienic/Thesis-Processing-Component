@@ -1,0 +1,155 @@
+
+<!-- 
+	TO DO:
+	1. install jquery
+	2. toggle scroll bars on and off.
+
+
+
+ -->
+
+<html>
+<head>
+<script type="text/javascript" src="processing.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- update color function-->
+<script type="text/javascript">
+var processingInstance;
+function setBrightness(newValue){
+console.log("BRIGHTNESS: " + newValue);
+processingInstance = Processing.getInstanceById("sketch");
+processingInstance.changeBrightness(newValue);
+processingInstance.brightSquare(newValue);
+}
+function setContrast(newValue2){
+console.log("CONTRAST: " + newValue2);
+processingInstance = Processing.getInstanceById("sketch");
+processingInstance.changeContrast(newValue2);
+}
+</script>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!--<script type="text/javascript">
+var c=document.getElementById("sketch");
+var ctx=c.getContext("2d");
+ctx.font="20px Georgia";
+ctx.fillText("Hello World!",10,100);
+</script>-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Brightness + Contrast</title>
+</head>
+<body>
+<div id="wrapper">
+<div id="navbar">
+	<a href="brightness.html"><img class="icon" src="icons/brightness-white-80.png"/></a>
+	<a href="contrast.html"><img class="icon" src="icons/contrast-white-illustrator-80.png"/></a>
+	<a href="bright-and-cont.html"><img class="icon" src="icons/brightness-contrast.png"/></a>
+	<a href="sharpen.html"><img class="icon" src="icons/sharpness-80.png"/></a>
+	<a href="blur.html"><img class="icon" src="icons/blur-icon.png"/></a>
+
+</div>
+<!-- <canvas data-processing-sources="simple_butterflies_test.pde" id="sketch"></canvas> -->
+<!-- <canvas data-processing-sources="simple_butterflies_test_histogram_diffalgorithm.pde" id="sketch"></canvas> -->
+<!-- <canvas data-processing-sources="simple_butterflies_test_histogram_diffalgorithm_2.pde" id="sketch"></canvas> -->
+<div class="wrapper" id="canvas wrap">
+<canvas data-processing-sources="simple_butterflies_test_histogram_diffalgorithm_3.pde" id="sketch"></canvas>
+<!-- <canvas id="keyimage" style="top:76px; left: 126px; position:absolute; width:458px; height:350px"> -->
+<canvas id="keyimage" style="top:76px; left: 126px; position:absolute; width:458px; height:350px">
+
+</canvas>
+<div id="interface" style="width: 800px; height: 100px;">
+	<div class="adjustment-holder" id="brightness">
+		<p class="slider-label" id="bright-label">Brightness</p>
+		<div class="control-slider-wrapper">
+			<input class="controlslider" id="slider-brightness" type="range" min="-200.00" max="200.00" value="0.0" step="1" onInput="setBrightness(this.value)" autocomplete="off"/>
+		</div>
+	</div>
+	<div class="adjustment-holder" id="contrast">
+		<p class="slider-label" id="cont-label">Contrast</p>
+		<div class="control-slider-wrapper">
+			<input class="controlslider" id="slider-contrast" type="range"  min="0" max="100" value="50" step="1" onInput="setContrast(this.value)" autocomplete="off"/>
+		</div>
+	</div> 
+	<!-- <div id="button" style="width:100px; height:100px; background-color: purple;"></div> -->
+	<div class="square" id="color-box" style="width: 100px; height: 100px;"></div>
+</div>
+<!--<div id="contrast">
+Contrast
+<input id="slider-contrast" type="range" class="controlslider" min="0" max="100" value="50" step="1" onInput="setContrast(this.value)" autocomplete="off"/>
+</div> -->
+	<!-- calls updateColor with the value of the slider whenever it is changed. -->
+
+</div>
+
+<!-- jQuery 
+1. #slider-brightness -> toggle
+2. #slider-contrast -> toggle
+-->
+<script type="text/javascript">
+$('#bright-label').click(function(){
+	$('#slider-brightness').toggle();
+});
+$('#cont-label').click(function(){
+	$('#slider-contrast').toggle();
+});
+</script>
+<script>
+	var image2 = new Image(),
+    cvs = document.getElementById("keyimage"),
+    ctxt = cvs.getContext("2d");
+
+        //img commands
+    image2.crossOrigin = 'anonymous';
+    image2.src = "butterflies_350x458.jpg";
+
+    image.onload = function () {
+      if (image.width != canvas.width){
+        cvs.width = image2.width;
+      }
+      if (image.height != canvas.height){
+        cvs.height = image2.height;
+      }
+      //context.clearRect(0, 0, canvas.width, canvas.height);
+
+ctxt.drawImage(image2, 0, 0, cvs.width, cvs.height);
+}
+</script>
+<script>
+function findPos(obj) {
+    var curleft = 0, curtop = 0;
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+        return { x: curleft, y: curtop };
+    }
+}
+
+function rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
+$('#keyimage').click(function(e){
+  // $('#canvas').mousemove(function(e) {
+      var pos = findPos(this);
+      var x = e.pageX - pos.x;
+      var y = e.pageY - pos.y;
+      var coord = "x=" + x + ", y=" + y;
+      var c = this.getContext('2d');
+      var p = c.getImageData(x, y, 1, 1).data; 
+      var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+      var r = p[0];
+      var g = p[1];
+      var b = p[2];
+
+      $('#status').html(r +" - "+ g+ " - " + b);
+      document.getElementById("color-box").style.backgroundColor = hex;
+  // });
+});
+</script>
+
+</body>
+</html>

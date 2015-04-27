@@ -1,0 +1,67 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<style>
+.slider {
+    height: 200px;
+    width: 5px;
+    margin: 5%;
+    /*margin: 5%;
+    min-width: 11em;
+    max-width: 90%;*/
+}
+.slider-digit {
+    cursor:            pointer;
+    margin:            -.6em;
+    position:        absolute;
+    top:            .32em;
+}
+
+/* Taken from jQueryUI */
+
+.ui-slider { background-color: #FA0; position: relative; text-align: left; }
+.ui-slider .ui-slider-handle { background-color: #FF0; position: absolute; z-index: 2; width: 1.2em; height: 1.2em; cursor: default; }
+.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+
+.ui-slider-horizontal { height: .8em; }
+.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
+.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+
+.ui-slider-vertical { width: .8em; height: 100px; }
+.ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; width: 1em; }
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
+.ui-slider-vertical .ui-slider-range-min { bottom: 0; }
+.ui-slider-vertical .ui-slider-range-max { top: 0; }
+
+</style>
+
+<div class="slider ui-corner-all"></div>
+
+<script type="text/javascript">
+
+$(function() {
+    var araObj = new Array( 10, 20, 30, 50, 75, 100, 200 );
+    
+    $(".slider").slider({
+            orientation: "vertical",
+            min: 0,
+            max: araObj.length,
+            value: 0,
+            create: function() {
+                $(this).children().addClass("ui-corner-all");
+                $(this).append($('<span></span>').css("top","0%").addClass("slider-digit").text(0));
+                for (i=0;i<=araObj.length;i++)
+                {
+                    $(this).append($('<span></span>').css("top",((i+1)*(100/araObj.length))+"%").addClass("slider-digit").text(araObj[i]));
+                };
+            }
+        });
+    
+    console.log(araObj);
+});
+
+</script>
+

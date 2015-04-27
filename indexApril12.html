@@ -1,0 +1,594 @@
+<!--
+PROBLEMS
+1. truly centering stuff
+2. getting header text color to change
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<style>
+canvas {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -o-crisp-edges;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+   /* display: inline-block;
+    position:relative;*/
+}
+#canvas-wrapper{
+    display: inline-block;
+    position:relative;
+}
+.controls{
+    display: inline-block;
+    position: relative;
+    margin-top: -600px;
+
+}
+.wrapper{
+    position: absolute;
+}
+input[type=range].blocks {
+    -webkit-appearance: none;
+    width: 200px;
+    height:10px;
+
+      -webkit-transform:rotate(90deg);       
+    -moz-transform:rotate(90deg);
+    -o-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    z-index: 0;
+}
+</style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Kylie Nicholson Thesis</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link href="css/kylie.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- jQuery and Tooltips -->
+    <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
+
+    <!-- Include Cycle2 -->
+    <script src="http://malsup.github.io/min/jquery.cycle2.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top">Start Bootstrap</a>
+            </li>
+            <li>
+                <a href="#top">Home</a>
+            </li>
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#services">Services</a>
+            </li>
+            <li>
+                <a href="#portfolio">Portfolio</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1 class="bluetitle">Digital Imaging 101</h1>
+            <h3 class="bluetitle">Light --> Data &amp; Beyond</h3>
+            <br>
+            <a href="#first-section" class="btn btn-dark btn-lg btn-whiteborder">Let's Go!</a>
+        </div>
+    </header>
+
+
+
+    <!-- About -->
+    <section id="first-section" class="about myabout">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                <br><br><br><br>
+                    <h2 class="text-center">What is a Digital Image?</h2>
+                    <hr class="small black"></hr>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="col-lg-6 col-lg-offset-3 text-center digital-imaging-explanation">
+                    <p class="lead">A digital image is an <b>expressed</b> array of numeric values that represent light intensity. <!-- Yes folks, that's right: the images on your phone, your tumblr and your instagram are rows and rows of numbers. Pretty cool, eh? --></p>
+                    <!-- have this come later on in the project -->
+                    <p class="lead">Explore what a digital image is:</p>
+                    <!-- <a href="#about" class="btn btn-dark btn-lg">Let's see it!</a> -->
+                    <a href="#about" class="btn btn-dark btn-lg" style="width:150px">Technologically</a>
+                    <a href="#about" class="btn btn-dark btn-lg" style="width:150px">Aesthetically</a>
+                    <a href="#about" class="btn btn-dark btn-lg" style="width:150px">Socially</a>
+                </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                   
+            </div><!-- /row -->
+        </div><!--/container-->
+    </section>
+
+    <!-- Content -->
+    <section id="about" class="about">
+                <div class="row">
+                 <div class="col-lg-8 col-lg-offset-2">
+                    <p class="lead text-center">A Digital Image is an array of pixels.</p>
+                    <hr class="small black"></hr>
+                        <p class="lead text-center">As you can see in this animation, an image is made up of rows and rows of pixels. In a color image, each pixel has three values: red, green, and blue (which you can see represented below). More on color later. For now, just focus on the concepts of <b>pixels</b> and <b>arrays</b>, which we will explore further.</p>
+                        <!-- <img class="img-responsive" id="playonhover" src="img/Compilation2.gif"/>  -->
+<!-- -->
+           <!--  <iframe src="http://storm.usc.edu/~kylienic/THESIS/Nicholson-Thesis-Wireframe/pixellate-js-2-vertslider.html"></iframe>  -->
+
+
+
+           <div id="wrapper">
+            <div id="canvas-wrapper">
+            <canvas id="canvas" width="800" height="600"></canvas>
+            </div> <!-- I think this might stretch image so fix dimensions when you finalize this script -->
+            <div class="controls">
+                <br>
+                <input id="blocks" class="blocks" type="range" min="0" max="50" value="50" autocomplete="off" list="steplist">
+                <datalist id="steplist">
+                <option>0</option>
+                <option>10</option>
+                <option>50</option>
+                
+                </datalist>
+                <!--  -->
+                <canvas id="example" width="200" height="60"></canvas>
+                <div id="status"></div>
+                <div id="color-box" style="width: 100px; height:100px;"></div>  
+            <!--<input id="animate" type="button" value="Animate">-->
+            </div>
+            </div>
+            <!--SCRIPT -->
+            <script type="text/javascript">
+            /// (C) Ken Fyrstenberg Nilsen, Abdias Software, CC3.0-attribute.
+            var ctx = canvas.getContext('2d'),
+                img = new Image(),
+                play = false;
+
+            /// turn off image smoothing - this will give the pixelated effect
+            ctx.mozImageSmoothingEnabled = false;
+            ctx.webkitImageSmoothingEnabled = false;
+            ctx.imageSmoothingEnabled = false;
+
+            /// wait until image is actually available
+            img.onload = pixelate;
+
+            /// some image, we are not struck with CORS restrictions as we
+            /// do not use pixel buffer to pixelate, so any image will do
+            img.src = 'img/butterflies.jpg';
+
+            /// MAIN function
+            function pixelate(v) {
+
+                /// if in play mode use that value, else use slider value
+                //var size = (play ? v : blocks.value) * 0.01,
+                var size = blocks.value * 0.01,
+
+                    /// cache scaled width and height
+                    w = canvas.width * size ,
+                    h = canvas.height * size;
+
+                /// draw original image to the scaled size
+                ctx.drawImage(img, 0, 0, w, h);
+
+                /// then draw that scaled image thumb back to fill canvas
+                /// As smoothing is off the result will be pixelated
+                ctx.drawImage(canvas, 0, 0, w, h, 0, 0, canvas.width, canvas.height);
+            }
+
+/// This runs the demo animation to give an impression of
+/// performance.
+/*function toggleAnim() {
+
+    /// limit blocksize as we don't want to animate tiny blocks
+    var v = Math.min(25, parseInt(blocks.value, 10)),
+        dx = 0.5; /// "speed"
+
+    /// toggle play flag set by button "Animate"
+    play = !play;
+
+    /// and update button's text
+    animate.value = play ? 'Stop' : 'Animate';
+
+    /// if in play mode start loop
+    if (play === true) anim();
+
+    /// animation loop
+    function anim() {
+
+        /// increase or decrease value
+        v += dx;
+
+        /// if at min or max reverse delta
+        if (v <= 1 || v > 25) dx = -dx;
+
+        /// pixelate image with current value
+        pixelate(v);
+
+        /// loop
+        if (play === true) requestAnimationFrame(anim);
+    }
+}*/
+
+/// event listeneners for slider and button
+blocks.addEventListener('input', pixelate, false);
+//animate.addEventListener('click', toggleAnim, false);
+
+/// poly-fill for requestAnmationFrame with fallback for older
+/// browsers which do not support rAF.
+window.requestAnimationFrame = (function () {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
+        window.setTimeout(callback, 1000 / 60);
+    };
+})();
+</script>
+<script type="text/javascript">
+function findPos(obj) {
+    var curleft = 0, curtop = 0;
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+        return { x: curleft, y: curtop };
+    }
+}
+
+function rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
+
+
+// // set up some squares
+// var example = document.getElementById('canvas');
+// var context = example.getContext('2d');
+// context.fillStyle = "rgb(255,0,0)";
+// context.fillRect(0, 0, 50, 50);
+// context.fillStyle = "rgb(0,0,255)";
+// context.fillRect(55, 0, 50, 50);
+
+$('#canvas').mousemove(function(e) {
+    var pos = findPos(this);
+    var x = e.pageX - pos.x;
+    var y = e.pageY - pos.y;
+    var coord = "x=" + x + ", y=" + y;
+    var c = this.getContext('2d');
+    var p = c.getImageData(x, y, 1, 1).data; 
+    var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+    var r = p[0];
+    var g = p[1];
+    var b = p[2];
+
+    $('#canvas').click(function(){
+    $('#status').html(r +" "+ g+ " " + b);
+    document.getElementById("color-box").style.backgroundColor = hex;
+
+});
+    //$('#status').html(coord + "<br>" + hex + r + g + b);
+    // $('#status').html("<div class=rgbinfo>" + "<span id=pix-r style='color: red;'>" + r + "</span> " + "<span id=pix-b style='color: green;'>" g + "</span> " + "<span id=pix-b style='color: blue;'>" + b + "</span> </div>");
+    // $('#status').html(r +" "+ g+ " " + b);
+    // document.getElementById("color-box").style.backgroundColor = hex;
+});
+
+// $('#canvas').click(function(){
+//     $('#status').html(r +" "+ g+ " " + b);
+//     document.getElementById("color-box").style.backgroundColor = hex;
+
+// });
+
+
+</script>
+<!-- -->
+
+                       <!-- tried to build it in browser <div class="cycle-slideshow">
+                            <img src="img/Cycle2/Frame1.png">
+                            <img src="img/Cycle2/Frame2.png">
+                            <img src="img/Cycle2/Frame3.png">
+                            <img src="img/Cycle2/Frame4.png">
+                            <img src="img/Cycle2/Frame5.png">
+                            <img src="img/Cycle2/Frame6.png">
+                        </div>-->
+                        <!--<br><br>
+                        <img class="img-responsive" id="playonhover" src="img/Compilation-OTG-2.png"/>-->
+                        <br>
+                        <center><a href="#array-section" class="btn btn-dark btn-lg">Onward</a></center>
+                        <br><br><br><br><br><br><br>
+                        <!--
+                        <p class="lead text-center">Each pixel consists of three values: a <span class="spanred">red</span>, <span class="spangreen">green</span>, and <span class="spanblue">blue</span> value. <br>These values are represented as a triple (<span class="spanred">red</span>, <span class="spangreen">green</span>, <span class="spanblue">blue</span>), also known as an RGB triple. <br>Each value is within the range 0 - 255, meaning that the lowest triple value is (0,0,0) and the largest triple value is (255,255,255). <span class="tooltip" title="because 256*256*256 = 16,777,216">16,777,216</span> 16,777,216 colors are represented between this range. -->
+                       
+                        <!-- I want this to be coded such that it starts playing once the section is displayed in the viewport.-->
+                        <br><br><br>
+                        <!-- write a code so that once the gif is done playing through, tooltips pop up (on hover to tell about RGB features) 
+                            7 seconds after page load, make someting change. then tooltips.-->
+                </div>
+                </div>
+    </section>
+    <section id="array-section">
+                <div class="row">
+                <!-- <div class="col-lg-3 col-lg-offset-1 text-center"> -->
+                <div class="col-lg-3 text-center col-lg-offset-5">
+                <center>
+                    <p id="array" class="lead text-center">An array is a grid of stored values.</p>
+                    <hr class="small black"></hr>
+                    <img class="img-responsive" src="img/imagearray2.jpg"/>
+                    <p>Think of it like cubbies. An array is a 2-dimensional storage system, meaning that it has both rows and columns. Each square holds a pixel value. </p>
+                    <br><br>
+                    </center>
+                </div>
+            </div>
+             <div class="row">
+                <!-- <div class="col-lg-3 text-center col-lg-offset-1"> -->
+                <div class="col-lg-3 text-center col-lg-offset-5">
+                <center>
+                    <p class="lead text-center">Each Pixel has an index location.</p>
+                    <hr class="small black"></hr>
+                    <img class="img-responsive" src="img/imagearray-labled-2.png"/>
+                      <!-- <p>The RGB value (red, green, blue) will become important very soon. It is a measure of light intensity.</p> -->
+                      <p>The pixel location is based on horizontal and vertical location, just like an (x,y) pair on the coordinate plane. </p>
+                </center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 text-center col-lg-offset-5">
+                <center>
+                    <p id="array" class="lead text-center">Each pixel has an RGB value.</p>
+                    <hr class="small black"></hr>
+                    <img class="img-responsive" src="img/imagearray-labled-2-wRGB.png"/>
+                    <p>The pixel value records the intensity of light recorded at that location in the image. The value is recorded as an RGB triple: (R, G, B), with each value representing the red, green and blue components of the incoming light, respectively.</p>
+                    <br><br>
+                    </center>
+                </div>
+                </div>
+    </section>
+    <section id="light-intensity">
+                <div class="row"> 
+                <div class="col-lg-4 col-lg-offset-4 text-center">
+                    <p class="lead text-center">Light intensity ranges from 0-255</p>
+                    <hr class="small black"></hr>
+                    <p>0 (the absense of light) is the darkest possible value. 255 is the maximum amount of light. In a greyscale example, 0 is black, 255 is white, and the numbers in between are varying shades of grey.</p>
+                    <img src="img/grayscale.jpg"/>
+                    <br><br><br>
+                </div>
+                </div>
+    </section>
+    <section id="color">
+                <div class="row"> 
+                <div class="col-lg-4 col-lg-offset-4 text-center">
+                    <p class="lead text-center">RGB Values</p>
+                    <hr class="small black"></hr>
+                    <p>Things get a little more complicated when we add in color. The range of values stays the same, but now you have three values instead of just one.</p>
+                    <img src="img/rgb2.png"/>
+                    <p>RGB is additive color. Complete color is white. Absence is black.<br>
+                    Play with the sliders below to make your own RGB colors!</p>
+                    <!-- THIS COULD LINK TO CHANNELS LATER IN THE PROJECT!!!!! -->
+                    <img src="img/RGB-sliders.png"/>
+                    <!--<div class="col-lg-6 camerasection" style="border: 2px solid black;">
+                        <p class="lead">Phone</p>
+                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    </div>-->
+                        <br><br>
+                    <p class="lead text-center">RGB and the Human Visual System</p>
+                    <hr class="small black"></hr>
+                    <p>"The choice of primary colors is related to the physiology of the human eye; good primaries are stimuli that maximize the difference between the responses of the cone cells of the human retina to light of different wavelengths, and that thereby make a large color triangle.[3]"-- wikipedia</p>
+                    <img src="img/Human-eye.jpeg"/>
+                       <br><br><a href="#about2" class="btn btn-dark btn-lg">Got it. Next!</a>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+<section id="about2" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <h1>How is a Digtal Image Created?</h1><!--created?-->
+                    <hr class="black"></hr>
+                    <h2>A digital camera contains a sensor that records incoming light.</h2><!--created?-->
+                    <hr class="small black"></hr>
+                    <div class="col-lg-12">
+                    <img src="img/Digital-Imaging-Infographic-2.png">
+                        <br><br>
+                       <br><br><a href="#manip" class="btn btn-dark btn-lg">Onward!</a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="manip" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1 row-centered">
+                    <h2>Digital Manipulations</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            <a href="detail2.html" style="color:white;">Brightness<!--exposure--></a>
+                            <br><br><br>
+                        </div>
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                           <br><br>
+                            Contrast
+                            <br><br><br>
+                        </div>
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Saturation
+                            <br><br><br>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Warmth/ Tint
+                            <br><br><br>
+                        </div>
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                           <br><br>
+                            Selective Blur
+                            <br><br><br>
+                        </div>
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Tone Curve
+                            <br><br><br>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Edge Detection/ Sharpness
+                            <br><br><br>
+                        </div>
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                           <br><br>
+                            Div 2
+                            <br><br><br>
+                        </div>
+                        <div class="col-md-4 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Div 3
+                            <br><br><br>
+                        </div>
+                        
+                    </div>
+
+
+                   <!-- <div class="row">
+                        <div class="col-md-3 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Div 5<br><br><br>
+                        </div>
+                        <div class="col-md-3 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Div 6<br><br><br>
+                        </div>
+                        <div class="col-md-3 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Div 7<br><br><br>
+                        </div>
+                        <div class="col-md-3 camerasection" style="border: 1px solid white;">
+                            <br><br>
+                            Div 8<br><br><br>
+                        </div>
+                    </div>-->
+
+                </div>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    
+                    <hr class="small">
+                    <p class="text-muted">&copy; Kylie Nicholson 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>

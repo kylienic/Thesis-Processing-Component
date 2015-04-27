@@ -1,0 +1,93 @@
+/*why can't i get my sliders to center vertically?*/
+body{
+
+	font-family: "Ubuntu", Sans-Serif;
+	font-size: 10pt;
+	font-weight: 400pt;
+}
+
+.adjustment-holder{
+	margin-bottom: 10px;
+	height: 40px;
+	position: absolute;
+	/*why does this stop floating when i toggle off input?*/
+}
+
+.control-slider{
+	/*position: relative;
+	margin-top: auto;
+	margin-bottom: auto;*/
+}
+
+.control-slider-wrapper{
+	display: inline-block;
+	margin-top: auto;
+	margin-bottom: auto;
+	height:22px;
+}
+
+.icon{
+
+	position: relative; 
+	margin-left:10px; 
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.image-canvas{
+	position: relative;
+	left: 119px;
+	top: 70px;
+	width: 1000px;
+}
+
+.slider-label{
+	position: relative;
+	display: inline;
+	margin-top: auto;
+	margin-bottom: auto;
+	top: -7px;
+}
+
+#Brightness{
+	display: inline-block;
+	position: relative;
+	width: 520px;
+	text-align: top;
+	left: 150px;
+	top: 40px;
+}
+
+#canvas{
+	margin-left: 15px;
+}
+
+#Contrast{
+	display: inline-block;
+	position: relative;
+	width: 520px;
+	text-align: top;
+	left: 150px;
+	top: 40px;
+}
+
+#interface{
+	position: absolute;
+	top: 420px;
+}
+
+#navbar{
+	width: 100px;
+	height: 100%;
+	fill: #000000;
+	background-color: #000000;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+#sketch{
+	position: relative;
+	left: 100px;
+	top: 50px;
+}

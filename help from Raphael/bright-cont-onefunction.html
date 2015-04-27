@@ -1,0 +1,101 @@
+<html>
+</head>
+<body>
+
+<div id="interface" style="width: 800px; height: 200px;">
+  <div class="adjustment-holder" id="brightness">
+    <p class="slider-label" id="bright-label">Brightness</p>
+    <div class="control-slider-wrapper">
+      <input class="controlslider" id="slider-brightness" type="range" min="-200.00" max="200.00" value="0.0" step="1" onInput="setBrightness(parseInt(this.value))" autocomplete="off"/>
+    </div>
+  </div>
+  <div class="adjustment-holder" id="contrast">
+    <p class="slider-label" id="cont-label">Contrast</p>
+    <div class="control-slider-wrapper">
+      <input class="controlslider" id="slider-contrast" type="range"  min="0" max="100" value="50" step="1" onInput="setContrast(parseInt(this.value))" autocomplete="off"/>
+    </div>
+  </div> 
+</div>
+
+
+<canvas id="canvas"></canvas>
+<canvas id="output"></canvas>
+<button onclick=
+"setBrightness(50);">click me</button>
+</body>
+<script type="text/javascript">
+// window.onload = function(){
+    var image = new Image(),
+        canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        OScanvas = document.getElementById("output"),
+        offctx = OScanvas.getContext('2d'),
+        gcont = 1,
+        gbright = 0;
+
+    //img commands
+    image.crossOrigin = 'anonymous';
+    image.src = "butterflies_350x458.jpg";
+
+image.onload = function () {
+      if (image.width != canvas.width){
+        canvas.width = image.width;
+      }
+      if (image.height != canvas.height){
+        canvas.height = image.height;
+      }
+      if (image.width != OScanvas.width){
+        OScanvas.width = image.width;
+      }
+      if (image.height != OScanvas.height){
+        OScanvas.height = image.height;
+      }
+      //context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      offctx.drawImage(image, 0, 0);
+
+}
+
+    // apply a filter to the image data contained in the canvas object
+  function filterCanvas() {
+      //get image data
+      var imageData = offctx.getImageData(0, 0, canvas.width, canvas.height);
+      // call brightness function
+      var newImage = brightness(imageData,13);
+      //update image data
+      offctx.putImageData(newImage, 0, 0);
+      //draw the image
+      //context.drawImage(image, 0, 0);
+  }
+
+function setBrightness(bL){
+  gbright = bL;
+  adjust();
+}
+
+function setContrast(cL){
+  gcont = cL/50; 
+  console.log("CONTRAST: " + gcont);
+  adjust();
+}
+
+function adjust(){
+  var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  var data = imageData.data;
+  for(var i=0;i<data.length;i+=4)
+    {
+        data[i] = (((data[i]-128)* gcont + 128)+gbright);
+        data[i+1]= (((data[i+1]-128)* gcont +128)+gbright);
+        data[i+2]=(((data[i+2]-128)* gcont +128)+gbright);
+
+        // data[i] = factor * (data[i] - 128) + 128;
+        // data[i+1] = factor * (data[i+1] - 128) + 128;
+        // data[i+2] = factor * (data[i+2] - 128) + 128;
+    }
+    //return imageData;
+    offctx.putImageData(imageData, 0, 0);
+}
+
+//}// end onload
+</script>
+</html>

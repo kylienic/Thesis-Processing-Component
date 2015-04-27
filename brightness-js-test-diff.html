@@ -1,0 +1,55 @@
+<html>
+<head>
+<script type="text/javascript">
+  window.onload = function(){
+    var image = new Image();
+    image.src = "butterflies_350x458.jpg";
+    var canvas = document.getElementById("canvas"),
+      context = canvas.getContext('2d');
+    var imageFilter = "brightness";
+    var filter = "brightness";
+
+    image.onload = function () {
+      if (image.width != canvas.width)
+        canvas.width = image.width;
+      if (image.height != canvas.height)
+        canvas.height = image.height;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      filterCanvas(imageFilter);
+    }
+
+
+
+    // apply a filter to the image data contained in the canvas object
+  function filterCanvas() {
+    if (canvas.width > 0 && canvas.height > 0) {
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      brightness(50);
+      context.putImageData(imageData, 0, 0);
+    }
+  }
+
+  // filter that brightens an image by adding a fixed value 
+  // to each color component
+  // a javascript closure is used to parameterize the filter 
+  // with the delta value
+  brightness = function(delta) {
+      return function (pixels, args) {
+        var d = pixels.data;
+        for (var i = 0; i < d.length; i += 4) {
+          d[i] += delta;     // red
+          d[i + 1] += delta; // green
+          d[i + 2] += delta; // blue   
+        }
+        return pixels;
+      };
+  };
+  filterCanvas();
+}
+
+  </script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>

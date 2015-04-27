@@ -1,0 +1,12 @@
+onclick()
+{
+	1. get pixel color data
+	2. color square with pixel color
+	3. (behind the scenes)- calculate pixel brightness
+	4. light up pixel brightness bin in histogram
+	5. put pixel value into brightness equation
+
+}
+
+// TO-DO (April 21):
+1. combine processing sketch with javascript code 

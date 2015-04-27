@@ -1,0 +1,54 @@
+[sourcecode language="html"]</pre>
+<html>
+<head>
+[sourcecode language="html"]
+<script type="text/javascript" src="processing.min.js"></script>
+<!-- update color function-->
+<script type="text/javascript">
+var processingInstance;
+function updateColor(newValue){
+console.log("SLIDER: " + newValue);
+processingInstance = Processing.getInstanceById("sketch");
+processingInstance.changeBGColor(newValue);
+}
+</script>
+[/sourcecode]
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+</head>
+
+<body>
+<script type="text/processing">
+int tWidth = 800;
+int tHeight = 600;
+int tRed = 255;
+
+void setup(){
+colorMode(RGB);
+size(tWidth,tHeight);
+background(0);
+smooth();
+}
+
+void draw(){
+fill(tRed,0,0,15);
+rect(0, 0, tWidth,tHeight);
+fill(255);
+ellipse(mouseX, mouseY, 25,25);
+}
+
+void changeBGColor(int tValue){
+tRed = tValue;
+}
+
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+<!--slider-->
+[sourcecode language="html"]
+<div id="interface" style="width: 800px; height: 100px;">
+<input type="range" class="colorslider" min="0" max="255" value="10" step="1" onChange="updateColor(this.value)"/>
+</div>
+[/sourcecode]
+</body>
+</html>
+[/sourcecode]

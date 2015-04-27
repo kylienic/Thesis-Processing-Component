@@ -1,0 +1,29 @@
+[sourcecode language="html"]</pre>
+<html>
+<head>
+[sourcecode language="html"]
+<script type="text/javascript" src="processing.min.js"></script>
+<!-- update color function-->
+<script type="text/javascript">
+var processingInstance;
+function updateBrightness(newValue){
+console.log("SLIDER: " + newValue);
+processingInstance = Processing.getInstanceById("sketch");
+processingInstance.changeBGColor(newValue);
+}
+</script>
+[/sourcecode]
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+</head>
+
+<body>
+<canvas data-processing-sources="mysketch.pde" id="sketch"></canvas>
+<div id="interface" style="width: 800px; height: 100px;">
+<input label="Brightness" type="range" class="colorslider" min="0" max="255" value="10" step="1" onChange="updateBrightness(this.value)"/>
+	// calls updateColor with the value of the slider whenever it is changed. 
+</div>
+[/sourcecode]
+</body>
+</html>
+[/sourcecode]

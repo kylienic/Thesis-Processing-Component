@@ -1,0 +1,15 @@
+Pixellate Pseudocode
+
+zoomin{
+	pixel-radius = pixel-radius+10;
+}
+
+zoomout{
+	pixel-radius = pixel-radius-10;
+}
+
+onclick{
+	if(clicked_on_pixel){
+		display pixel info
+	}
+}

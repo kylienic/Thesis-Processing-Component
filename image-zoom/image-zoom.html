@@ -1,0 +1,21 @@
+<html>
+<head><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="libs/jquery-ui.js"></script>
+<script type="text/javascript" src="src/imgViewer.js"></script>
+
+<script type="text/javascript" src="libs/jquery.mousewheel.min.js"></script>
+</head>
+<body>
+<img id="image1" src="1.jpg" width="600" />
+</body>
+<script type="text/javascript">
+;(function($) {
+$("#image1").imgViewer({
+onClick: function( e, self ) {
+var pos = self.cursorToImg( e.pageX, e.pageY);
+$("#position").html(e.pageX + " " + e.pageY + " " + pos.relx + " " + pos.rely);
+}
+});
+})(jQuery);
+</script>
+</html>

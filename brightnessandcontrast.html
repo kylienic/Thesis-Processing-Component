@@ -1,0 +1,42 @@
+<html>
+<head>
+<script type="text/javascript" src="processing.min.js"></script>
+<!-- update color function-->
+<script type="text/javascript">
+var processingInstance;
+function setBrightness(newValue){
+console.log("BRIGHTNESS: " + newValue);
+processingInstance = Processing.getInstanceById("sketch");
+processingInstance.changeBrightness(newValue);
+}
+function setContrast(newValue2){
+console.log("CONTRAST: " + newValue2);
+processingInstance = Processing.getInstanceById("myCanvas");
+processingInstance.changeContrast(newValue2);
+}
+</script>
+<!--<script type="text/javascript">
+var c=document.getElementById("sketch");
+var ctx=c.getContext("2d");
+ctx.font="20px Georgia";
+ctx.fillText("Hello World!",10,100);
+</script>-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Brightness</title>
+</head>
+<body>
+<canvas data-processing-sources="simple_butterflies_test.pde" id="sketch"></canvas>
+<div id="interface" style="width: 800px; height: 100px;">
+<div id="brightness">
+Brightness
+<input id="slider-brightness" type="range" class="controlslider" min="-200.00" max="200.00" value="0.0" step="1" onInput="setBrightness(this.value)" autocomplete="off"/>
+</div>
+<div id="contrast">
+Contrast
+<input id="slider-contrast" type="range" class="controlslider" min="0" max="100" value="50" step="1" onInput="setContrast(this.value)" autocomplete="off"/>
+</div>
+	<!-- calls updateColor with the value of the slider whenever it is changed. -->
+</div>
+</body>
+</html>

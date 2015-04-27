@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Sharpen</title>
+</head>
+<body>
+<div id="wrapper">
+<div id="navbar">
+	<a href="brightness.html"><img class="icon" src="icons/brightness-white-80.png"/></a>
+	<a href="contrast.html"><img class="icon" src="icons/contrast-white-illustrator-80.png"/></a>
+	<a href="bright-and-cont.html"><img class="icon" src="icons/brightness-contrast.png"/></a>
+	<a href="sharpen.html"><img class="icon" src="icons/sharpness-80.png"/></a>
+	<a href="blur.html"><img class="icon" src="icons/blur-icon.png"/></a>
+
+</div>
+<div class="image-canvas">
+<img src="butterflies_350x458.jpg"/>
+<canvas id="canvas" width=483 height=350></canvas><br>
+<!--Sharpen <input type=range id=mix min=0 max=100 value=5 step="1" oninput="update()" autocomplete="off">-->
+
+<!-- begin toolbar -->
+<label for=mix>Sharpness</label>
+<input type=range id=mix min=0 max=100 value=5 step="1" oninput="update()" autocomplete="off">
+<output for=mix id="sharpLabel">5 </output>
+<!-- end toolbar --> 
+
+</div>
+
+
+
+<script type="text/javascript">
+var canvas = document.getElementById("canvas"),
+    ctx = canvas.getContext("2d"),
+    offScreen = document.createElement('canvas'),
+    offctx = offScreen.getContext('2d'),
+    img = new Image();
+    
+
+/// as we need pixel access to apply convolution we
+/// need to get around CORS:
+img.crossOrigin = 'anonymous';
+
+/// when image is loaded step-down the downscaling
+img.onload = resize;
+img.src = "butterflies_350x458.jpg";
+img2.src = "butterflies_350x458.jpg";
+
+img2.drawImage(0,0)
+
+/// sharpen image:
+/// USAGE:
+///    sharpen(context, width, height, mixFactor)
+///  mixFactor: [0.0, 1.0]
+function sharpen(ctx, w, h, mix) {
+
+    var weights = [0, -1, 0, -1, 5, -1, 0, -1, 0],
+        katet = Math.round(Math.sqrt(weights.length)),
+        half = (katet * 0.5) | 0,
+        dstData = ctx.createImageData(w, h),
+        dstBuff = dstData.data,
+        srcBuff = ctx.getImageData(0, 0, w, h).data,
+        y = h;
+
+    while (y--) {
+
+        x = w;
+
+        while (x--) {
+
+            var sy = y,
+                sx = x,
+                dstOff = (y * w + x) * 4,
+                r = 0,
+                g = 0,
+                b = 0,
+                a = 0;
+
+            for (var cy = 0; cy < katet; cy++) {
+                for (var cx = 0; cx < katet; cx++) {
+
+                    var scy = sy + cy - half;
+                    var scx = sx + cx - half;
+
+                    if (scy >= 0 && scy < h && scx >= 0 && scx < w) {
+
+                        var srcOff = (scy * w + scx) * 4;
+                        var wt = weights[cy * katet + cx];
+
+                        r += srcBuff[srcOff] * wt;
+                        g += srcBuff[srcOff + 1] * wt;
+                        b += srcBuff[srcOff + 2] * wt;
+                        a += srcBuff[srcOff + 3] * wt;
+                    }
+                }
+            }
+
+            dstBuff[dstOff] = r * mix + srcBuff[dstOff] * (1 - mix);
+            dstBuff[dstOff + 1] = g * mix + srcBuff[dstOff + 1] * (1 - mix);
+            dstBuff[dstOff + 2] = b * mix + srcBuff[dstOff + 2] * (1 - mix)
+            dstBuff[dstOff + 3] = srcBuff[dstOff + 3];
+        }
+    }
+
+    ctx.putImageData(dstData, 0, 0);
+}
+
+/// naive and non-efficient implementation of update, but
+/// do illustrate the impact of sharpen after a downsample
+function resize() {
+    
+    /// set canvas size proportional to original image
+    canvas.height = canvas.width * (img.height / img.width);
+
+    /// set off-screen canvas/sharpening source to same size
+    offScreen.width = canvas.width;
+    offScreen.height = canvas.height;
+    
+    /// step 1 in down-scaling
+    var oc = document.createElement('canvas'),
+        octx = oc.getContext('2d');
+
+    oc.width = img.width;
+    //oc.width = img.width * 0.5;
+    oc.height = img.height;
+    //oc.height = img.height * 0.5;
+    octx.drawImage(img, 0, 0, oc.width, oc.height);
+
+    /// step 2
+    octx.drawImage(oc, 0, 0, oc.width, oc.height);
+    //octx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5);
+
+    /// draw final result to screen canvas
+    ctx.drawImage(oc, 0, 0, oc.width, oc.height,
+    0, 0, canvas.width, canvas.height);
+    //ctx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5,
+    //0, 0, canvas.width, canvas.height);
+
+
+    /// copy to off-screen to use as source for shapening
+    offctx.drawImage(canvas, 0, 0);
+    
+    /// apply sharpening convolution
+    update();
+}
+
+/// adjustable sharpening - update cached source
+function update() {
+    ctx.drawImage(offScreen, 0, 0);
+    sharpen(ctx, canvas.width, canvas.height, parseInt(mix.value) * 0.01);
+    document.querySelector('#sharpLabel').value = mix.value;
+}
+</script>
+</div>
+</body>
+</html>
